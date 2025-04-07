@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Добавлен user-scalable=no -->
+  <title>Brain Training Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="colorful-theme"> <!-- Класс темы по умолчанию -->
+  <div class="container">
+    <!-- Icon bar -->
+    <div class="icon-bar">
+      <!-- Используем классы из style.css для иконок -->
+      <div class="icon icon-games" data-action="games"></div>
+      <div class="icon icon-stats" data-action="stats"></div>
+      <div class="icon icon-inventory" data-action="inventory"></div>
+      <div class="icon icon-room" data-action="room"></div>
+      <div class="icon icon-battle" data-action="battle"></div>
+    </div>
+
+    <h1>DAILY TRAINING</h1>
+
+    <!-- Game options -->
+    <div class="game-grid">
+      <!-- Math Game Card -->
+      <div class="game-card math-game">
+        <h2>MATH</h2>
+        <p>15 + 16 = ?</p>
+        <!-- Кнопка Start с классом для картинки -->
+        <button class="start-button math-start" data-game="math"></button>
+      </div>
+
+      <!-- Memory Game Card -->
+      <div class="game-card memory-game">
+        <h2>MEMORY</h2>
+        <p>Remember 30 words in 2 minutes</p> <!-- Увеличено кол-во слов как в memory_game.js -->
+        <!-- Кнопка Start с классом для картинки -->
+        <button class="start-button memory-start" data-game="memory"></button>
+      </div>
+    </div>
+
+    <!-- Theme switcher -->
+    <div class="theme-switcher">
+      <button id="colorful-theme-btn">Colorful</button> <!-- Изменены ID кнопок темы -->
+      <button id="light-theme-btn">Light</button>
+      <button id="dark-theme-btn">Dark</button>
+    </div>
+
+    <!-- Modal for messages -->
+    <div id="modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close">×</span>
+        <p id="modal-message"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

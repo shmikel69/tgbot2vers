@@ -1,0 +1,218 @@
+/* Battle Arena Styles */
+.battle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.player-area, .enemy-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.vs-indicator {
+    font-size: 2em;
+    font-weight: bold;
+    color: #f39c12;
+    text-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
+    padding: 0 15px;
+}
+
+/* Character displays */
+.player-character, .enemy-character {
+    position: relative;
+    width: 150px;
+    height: 200px;
+}
+
+.character-container, .enemy-container {
+    position: relative;
+    width: 100px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.enemy-container {
+    cursor: pointer; /* Make enemy clickable */
+    user-select: none; /* Prevent selection when clicking rapidly */
+}
+
+.char-layer, .enemy-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Health bars */
+.health-bar {
+    width: 100%;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.health-fill {
+    height: 100%;
+    background-color: #27ae60;
+    width: 100%;
+    transition: width 0.3s;
+}
+
+/* Animation classes */
+.attack-animation {
+    animation: attack-bounce 0.5s;
+}
+
+.damaged-animation {
+    animation: damage-flash 0.5s;
+}
+
+.damage-number {
+    position: absolute;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 18px;
+    animation: float-up 1s forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.heal-number {
+    position: absolute;
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 18px;
+    animation: float-up 1s forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes attack-bounce {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(20px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes damage-flash {
+    0% { filter: brightness(1); }
+    25% { filter: brightness(1.5); }
+    50% { filter: brightness(1); }
+    75% { filter: brightness(1.5); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes float-up {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-30px); }
+}
+
+/* Enemy types */
+.enemy-slime {
+    background-color: #3498db;
+    border-radius: 50% 50% 30% 30%;
+}
+
+.enemy-goblin {
+    background-color: #27ae60;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.enemy-ghost {
+    background-color: rgba(189, 195, 199, 0.7);
+    clip-path: polygon(0% 50%, 20% 0%, 50% 25%, 80% 0%, 100% 50%, 80% 100%, 50% 90%, 20% 100%);
+}
+
+.enemy-dragon {
+    background-color: #e74c3c;
+    clip-path: polygon(0% 20%, 40% 0%, 60% 0%, 100% 20%, 80% 80%, 50% 100%, 20% 80%);
+}
+
+.enemy-boss {
+    background-color: #8e44ad;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+}
+
+/* Healing orb */
+.healing-orb {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #27ae60;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation: pulse 1s infinite;
+    z-index: 10;
+    user-select: none;
+}
+
+.healing-orb {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #27ae60; /* Зеленый цвет */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation: pulse 1s infinite;
+    z-index: 10;
+    user-select: none;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.7); /* Зеленое свечение */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Battle rewards styling */
+.battle-rewards {
+    margin-top: 15px;
+}
+
+.reward-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.reward-icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.reward-name {
+    flex: 1;
+}
+
+.reward-value {
+    font-weight: bold;
+    color: #f1c40f;
+}

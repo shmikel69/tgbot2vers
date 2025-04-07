@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Character Stats</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- character.css не нужен, стили в style.css -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!-- Оставляем на всякий случай -->
+</head>
+<body class="colorful-theme"> <!-- Тема будет применена скриптом -->
+    <div class="container stats-container">
+        <!-- Icon bar - Используем правильные классы -->
+        <div class="icon-bar">
+            <div class="icon icon-games" data-action="games"></div>
+            <div class="icon icon-stats" data-action="stats"></div>
+            <div class="icon icon-inventory" data-action="inventory"></div>
+            <div class="icon icon-room" data-action="room"></div>
+            <div class="icon icon-battle" data-action="battle"></div>
+        </div>
+
+        <div class="stats-header">
+            <h1>CHARACTER STATS</h1>
+
+            <!-- Character Preview Area -->
+            <div class="character-preview">
+                <!-- Персонаж -->
+                <div id="character-base" class="character-container">
+                    <!-- Слои добавляются через JS -->
+                    <div id="char-body" class="char-layer"></div>
+                    <div id="char-outfit" class="char-layer"></div>
+                    <div id="char-head" class="char-layer"></div>
+                    <div id="char-face" class="char-layer">
+                        <div id="char-mouth"></div>
+                    </div>
+                    <div id="char-headgear" class="char-layer"></div>
+                    <div id="char-weapon" class="char-layer"></div>
+                </div>
+                <!-- Питомец (если есть) -->
+                <div id="pet-display" class="pet-preview" style="display: none;"> <!-- Изначально скрыт -->
+                    <div id="pet-base" class="pet-container">
+                         <!-- Слои добавляются через JS -->
+                        <div id="pet-body" class="pet-layer"></div>
+                        <div id="pet-head" class="pet-layer"></div>
+                        <div id="pet-face" class="pet-layer">
+                            <div id="pet-mouth"></div>
+                        </div>
+                        <div id="pet-accessory" class="pet-layer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level Info -->
+            <div class="level-info">
+                <h2>Level <span id="level-value">1</span></h2>
+                <div class="xp-info">
+                    <span>XP: <span id="xp-value">0</span> / <span id="xp-next-level">100</span></span>
+                    <div class="xp-bar">
+                        <div id="xp-fill" class="xp-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lives -->
+            <div class="lives-section">
+                <h3>LIVES</h3>
+                <div id="lives-container" class="lives-container">
+                    <!-- Иконки жизней добавляются через JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Buffs Section -->
+        <div class="stats-section">
+            <h3>BUFFS</h3>
+            <div id="buffs-container" class="buffs-container">
+                <div class="no-buffs">No active buffs</div> <!-- Сообщение по умолчанию -->
+            </div>
+        </div>
+
+        <!-- Attributes Section -->
+        <div class="stats-section">
+            <h3>ATTRIBUTES</h3>
+            <div class="attributes-grid">
+                <!-- Атрибуты заполняются через JS -->
+                <div class="attribute">
+                    <div class="attribute-name">Intelligence</div>
+                    <div class="attribute-bar"><div class="attribute-fill intelligence-fill"></div></div>
+                    <div id="intelligence-value" class="attribute-value">0</div>
+                </div>
+                 <div class="attribute">
+                    <div class="attribute-name">Sports</div>
+                    <div class="attribute-bar"><div class="attribute-fill sports-fill"></div></div>
+                    <div id="sports-value" class="attribute-value">0</div>
+                </div>
+                <div class="attribute">
+                    <div class="attribute-name">Languages</div>
+                    <div class="attribute-bar"><div class="attribute-fill languages-fill"></div></div>
+                    <div id="languages-value" class="attribute-value">0</div>
+                </div>
+                 <div class="attribute">
+                    <div class="attribute-name">Energy</div>
+                    <div class="attribute-bar"><div class="attribute-fill energy-fill"></div></div>
+                    <div id="energy-value" class="attribute-value">0</div>
+                </div>
+                <div class="attribute">
+                    <div class="attribute-name">Creativity</div>
+                    <div class="attribute-bar"><div class="attribute-fill creativity-fill"></div></div>
+                    <div id="creativity-value" class="attribute-value">0</div>
+                </div>
+                <div class="attribute">
+                    <div class="attribute-name">Health</div>
+                    <div class="attribute-bar"><div class="attribute-fill health-fill"></div></div>
+                    <div id="health-value" class="attribute-value">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipment Section -->
+        <div class="stats-section">
+            <h3>CURRENT EQUIPMENT</h3>
+            <div class="equipment-container">
+                <!-- Слоты заполняются через JS -->
+                <div class="equipment-slot" data-slot="headgear"> <!-- Изменен data-slot на headgear -->
+                    <div class="slot-name">Head</div>
+                    <div class="slot-icon empty">?</div>
+                </div>
+                <div class="equipment-slot" data-slot="outfit"> <!-- Изменен data-slot на outfit -->
+                    <div class="slot-name">Body</div>
+                    <div class="slot-icon empty">?</div>
+                </div>
+                 <div class="equipment-slot" data-slot="weapon"> <!-- Изменен data-slot на weapon -->
+                    <div class="slot-name">Weapon</div>
+                    <div class="slot-icon empty">?</div>
+                </div>
+                <div class="equipment-slot" data-slot="skin" style="cursor: default;"> <!-- Слот скина нельзя снять -->
+                    <div class="slot-name">Skin</div>
+                    <div class="slot-icon equipped">S</div> <!-- Скин всегда есть -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="stats-section achievements-section">
+            <h3>ACHIEVEMENTS</h3>
+            <!-- Достижения заполняются через JS -->
+            <div id="achievement-memory" class="achievement locked">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-info">
+                    <div class="achievement-name">Memory Master</div>
+                    <div class="achievement-desc">Remember 16+ words in the memory game</div>
+                </div>
+            </div>
+            <div id="achievement-math" class="achievement locked">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-info">
+                    <div class="achievement-name">Math Wizard</div>
+                    <div class="achievement-desc">Solve 87 math problems under 4 minutes</div>
+                </div>
+            </div>
+            <div id="achievement-streak" class="achievement locked">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-info">
+                    <div class="achievement-name">Daily Streak</div>
+                    <div class="achievement-desc">Play for 7 days in a row</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-container">
+            <button id="back-to-home" class="back-button">Back to Menu</button>
+            <button id="customize-button" class="action-button">Customize Char</button> <!-- Изменен текст -->
+            <button id="pet-button" class="action-button">Pet</button>
+        </div>
+    </div>
+
+    <!-- Customization Modal (остается без изменений) -->
+    <div id="customization-modal" class="modal">
+        <div class="modal-content customization-content">
+            <span class="close">×</span>
+            <h2>Customization</h2>
+            <!-- Контент добавляется через JS -->
+             <button id="save-customization" class="action-button">Save Changes</button> <!-- Кнопка Сохранить -->
+        </div>
+    </div>
+
+    <script src="stats.js"></script>
+    <!-- script.js не нужен здесь, если stats.js обрабатывает навигацию и темы -->
+     <script>
+      // Простое применение темы и навигация (если script.js не включен)
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem("preferred-theme");
+        document.body.className = (savedTheme || "colorful") + "-theme";
+
+         document.querySelectorAll(".icon").forEach(icon => {
+            icon.addEventListener("click", function() {
+                const action = this.getAttribute("data-action");
+                if (action === "inventory") { alert("🎒 Inventory is under development."); }
+                else if (action === "games") { window.location.href = "index.html"; }
+                else if (action === "room") { window.location.href = "room.html"; }
+                else if (action === "stats") { /* Already here */ }
+                else if (action === "battle") { window.location.href = "battle.html"; }
+            });
+         });
+          // Кнопка Назад
+          document.getElementById('back-to-home').addEventListener('click', () => {
+             window.location.href = 'index.html';
+          });
+      });
+   </script>
+</body>
+</html>

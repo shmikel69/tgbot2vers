@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Memory Challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="colorful-theme"> <!-- Тема применится JS -->
+    <div class="container">
+        <!-- Icon bar -->
+        <div class="icon-bar">
+             <div class="icon icon-games" data-action="games"></div>
+             <div class="icon icon-stats" data-action="stats"></div>
+             <div class="icon icon-inventory" data-action="inventory"></div>
+             <div class="icon icon-room" data-action="room"></div>
+             <div class="icon icon-battle" data-action="battle"></div>
+        </div>
+        <!-- Убран дублирующийся блок иконок -->
+
+        <!-- Memorize Phase -->
+        <div id="memorize-phase" class="game-screen">
+            <h2>MEMORY CHALLENGE</h2>
+            <div class="timer" id="timer">2:00</div> <!-- ID для таймера -->
+            <h3>Memorize these 30 words:</h3>
+            <div id="word-container" class="word-container"></div>
+             <div class="button-container"> <!-- Оборачиваем кнопку -->
+                 <button id="cancel-memory" class="back-button">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Recall Phase -->
+        <div id="recall-phase" class="game-screen" style="display:none;">
+            <h2>Time's up!</h2>
+            <p>Type all the words you remember (separate with spaces or new lines):</p>
+            <textarea id="recall-input" class="recall-input" placeholder="Enter words here..."></textarea>
+             <div class="button-container"> <!-- Оборачиваем кнопки -->
+                 <button id="submit-recall" class="action-button">Submit</button>
+                 <button id="cancel-recall" class="back-button">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results" class="game-screen" style="display:none;">
+            <h2>Your Results</h2>
+            <div class="result-display"> <!-- Добавлен общий класс для стилизации -->
+                 <p>Words correctly remembered: <span id="correct-count">0</span> / 30</p>
+                 <p>XP earned: <span id="xp-earned">0</span></p>
+            </div>
+             <div class="button-container"> <!-- Оборачиваем кнопку -->
+                <button id="back-to-menu" class="back-button">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="memory_game.js"></script>
+     <script>
+       // Применение темы и навигация (если нужно)
+       document.addEventListener('DOMContentLoaded', () => {
+         const savedTheme = localStorage.getItem("preferred-theme");
+         document.body.className = (savedTheme || "colorful") + "-theme";
+          document.querySelectorAll(".icon").forEach(icon => {
+             icon.addEventListener("click", function() {
+                 const action = this.getAttribute("data-action");
+                 if (action === "inventory") { alert("🎒 Inventory is under development."); }
+                 else if (action === "games") { window.location.href = "index.html"; }
+                 else if (action === "room") { window.location.href = "room.html"; }
+                 else if (action === "stats") { window.location.href = "stats.html"; }
+                 else if (action === "battle") { window.location.href = "battle.html"; }
+             });
+          });
+       });
+    </script>
+</body>
+</html>

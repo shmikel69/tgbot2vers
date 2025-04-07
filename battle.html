@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Добавлен user-scalable=no -->
+  <title>Battle - Brain Training Game</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Убраны отдельные battle.css и character.css, т.к. стили в style.css -->
+</head>
+<body class="colorful-theme"> <!-- Тема будет установлена из localStorage скриптом -->
+  <div class="container">
+    <!-- Icon bar -->
+    <div class="icon-bar">
+      <div class="icon icon-games" data-action="games"></div>
+      <div class="icon icon-stats" data-action="stats"></div>
+      <div class="icon icon-inventory" data-action="inventory"></div>
+      <div class="icon icon-room" data-action="room"></div>
+      <div class="icon icon-battle" data-action="battle"></div>
+    </div>
+
+    <h1>⚔️ BATTLE ARENA</h1>
+
+    <!-- Battle Quiz Section -->
+    <div id="battle-quiz-container" class="battle-quiz-container">
+      <h3>Answer correctly for battle buffs!</h3>
+      <div id="battle-quiz-question" class="battle-quiz-question"></div>
+      <div id="battle-quiz-options" class="battle-quiz-options"></div>
+      <div id="quiz-result" class="result-display"></div>
+      <!-- Кнопка "Battle" будет показана здесь скриптом после ответа -->
+      <div id="battle-start-container" class="battle-start-container" style="display: none;">
+        <button id="start-battle-button" class="action-button">Battle</button>
+      </div>
+    </div>
+
+    <!-- Battle Arena Section (Изначально скрыт) -->
+    <div id="battle-container" class="battle-container" style="display: none;">
+      <div class="player-area">
+         <!-- Контейнер для персонажа игрока -->
+        <div id="player-character" class="character-container">
+            <!-- Слои персонажа будут добавлены скриптом -->
+        </div>
+        <div class="health-bar">
+          <div id="player-health" class="health-fill">100%</div> <!-- Добавлен текст для отладки -->
+        </div>
+      </div>
+
+      <div class="vs-indicator">VS</div>
+
+      <div class="enemy-area">
+         <!-- Контейнер для врага -->
+        <div id="enemy-character" class="enemy-container">
+             <!-- Класс врага будет добавлен скриптом -->
+        </div>
+        <!-- Информация о враге -->
+        <div style="text-align: center;">
+          <div id="enemy-name">Enemy</div>
+          <div id="enemy-level">Level: ?</div>
+          <div id="enemy-type">Type: ?</div>
+        </div>
+        <div class="health-bar">
+          <div id="enemy-health" class="health-fill">100%</div> <!-- Добавлен текст для отладки -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Healing Orb (изначально скрыт) -->
+    <div id="healing-orb" class="healing-orb" style="display: none;">+</div>
+
+    <!-- Battle Messages (Изначально скрыт или пуст) -->
+    <div id="battle-messages" class="battle-messages" style="display: none;"></div>
+
+    <!-- Кнопка Назад (Центрирована) -->
+    <div class="button-container">
+      <button id="back-to-menu" class="back-button">Back to Menu</button>
+    </div>
+  </div>
+
+  <!-- Подключаем скрипты в правильном порядке -->
+  <script src="battle_quiz.js"></script>
+  <script src="battle.js"></script>
+  <!-- Основной скрипт для тем и навигации (если он нужен на всех страницах) -->
+  <!-- <script src="script.js"></script> -->
+   <script>
+      // Простое применение темы из localStorage, если основной script.js не используется
+      // или его функциональность не перенесена в battle_quiz.js/battle.js
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem("preferred-theme");
+        if (savedTheme) {
+          document.body.className = savedTheme + "-theme";
+        } else {
+          document.body.className = "colorful-theme"; // Тема по умолчанию
+        }
+
+        // Обработчик для иконок навигации (дублируем из script.js, если он не подключен)
+         document.querySelectorAll(".icon").forEach(icon => {
+            icon.addEventListener("click", function() {
+                const action = this.getAttribute("data-action");
+                if (action === "inventory") {
+                    alert("🎒 Inventory is under development."); // Используем alert для простоты
+                } else if (action === "games") {
+                    window.location.href = "index.html";
+                } else if (action === "room") {
+                    window.location.href = "room.html";
+                } else if (action === "stats") {
+                    window.location.href = "stats.html";
+                } else if (action === "battle") {
+                   // Уже на странице битвы
+                   window.location.reload(); // Перезагрузить, чтобы начать заново с квиза
+                }
+            });
+         });
+
+         // Обработчик кнопки Назад
+         document.getElementById('back-to-menu').addEventListener('click', function() {
+            // Останавливаем бой перед уходом
+            if (window.battleInProgress && typeof window.endBattleCleanup === 'function') {
+                window.endBattleCleanup(); // Вызываем функцию очистки, если она есть
+            }
+            window.location.href = 'index.html';
+        });
+
+      });
+   </script>
+</body>
+</html>

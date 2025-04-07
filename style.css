@@ -1,0 +1,1733 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Изменено на flex-start для лучшего контроля над контейнером */
+  min-height: 100vh;
+  padding-top: 20px; /* Добавлен отступ сверху */
+  padding-bottom: 20px; /* Добавлен отступ снизу */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Фиксируем фон */
+  color: #fff; /* Базовый цвет текста для всех тем */
+}
+
+.container {
+  background-color: rgba(25, 25, 35, 0.6); /* Немного увеличена непрозрачность */
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  backdrop-filter: blur(8px); /* Немного усилен блюр */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Усилена тень */
+}
+
+/* Navigation Icons */
+.icon-bar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 10px 0; /* Добавлен внутренний отступ */
+  background-color: rgba(0, 0, 0, 0.2); /* Полупрозрачный фон для бара */
+  border-radius: 10px; /* Скругление для бара */
+}
+
+.icon {
+  width: 45px; /* Немного увеличен размер */
+  height: 45px; /* Немного увеличен размер */
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none; /* Убираем рамку, если она есть */
+  background-color: transparent; /* Прозрачный фон */
+}
+
+.icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4)); /* Усилена тень при наведении */
+}
+
+/* --- ИСПРАВЛЕННЫЕ ПУТИ К ИКОНКАМ (предполагаем, что они в корне) --- */
+.icon-games {
+  background-image: url('games.png');
+}
+
+.icon-stats {
+  background-image: url('stats.png');
+}
+
+.icon-inventory {
+  background-image: url('inventory.png');
+}
+
+.icon-room {
+  background-image: url('room.png');
+}
+
+.icon-battle {
+  background-image: url('battle.png');
+}
+/* Убираем отдельный стиль .battle-icon, так как используется .icon-battle */
+
+h1, h2, h3 {
+  color: #fff; /* Цвет заголовков по умолчанию */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 2em;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h2 {
+ font-size: 1.5em;
+ margin: 15px 0;
+ text-transform: uppercase;
+}
+
+h3 {
+font-size: 1.2em;
+margin: 10px 0;
+color: #4e9af1; /* Цвет подзаголовков */
+text-transform: uppercase;
+}
+
+
+/* --- РАСПОЛОЖЕНИЕ ИГРОВЫХ КАРТОЧЕК (Math - слева, Memory - справа) --- */
+.game-grid {
+  display: flex;
+  flex-direction: column; /* Располагаем карточки друг под другом */
+  align-items: center; /* Центрируем по горизонтали по умолчанию */
+  gap: 20px; /* Отступ между карточками */
+  width: 100%;
+  margin: 20px 0;
+}
+
+.game-card {
+  background-color: rgba(45, 45, 65, 0.7);
+  padding: 16px;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 90%; /* Задаем ширину карточек */
+}
+
+.math-game {
+  align-self: flex-start; /* Выравниваем Math слева */
+}
+
+.memory-game {
+  align-self: flex-end; /* Выравниваем Memory справа */
+}
+
+.game-card:hover {
+  transform: translateY(-5px) scale(1.02); /* Небольшое увеличение при наведении */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.game-card h2 {
+  margin-top: 0;
+  margin-bottom: 8px; /* Уменьшен отступ */
+  font-size: 1.4em; /* Немного уменьшен шрифт */
+}
+
+.game-card p {
+  margin: 10px 0;
+  color: #ddd;
+  font-size: 0.95em; /* Немного уменьшен шрифт */
+  min-height: 3em; /* Задаем минимальную высоту для выравнивания */
+}
+
+/* --- СТИЛИ ДЛЯ КНОПОК START (КАРТИНКИ) --- */
+.start-button {
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 120px; /* Ширина картинки кнопки */
+  height: 45px; /* Высота картинки кнопки */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent; /* Убираем фон */
+  display: block; /* Чтобы margin auto сработал */
+  margin: 10px auto 0; /* Отступ сверху и центрирование */
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+}
+
+.start-button.math-start {
+  background-image: url('math_start.png'); /* Путь к картинке */
+}
+
+.start-button.memory-start {
+  background-image: url('memory_start.png'); /* Путь к картинке */
+}
+
+/* Общие стили для кнопок */
+.back-button, .action-button, .submit-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px 5px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover, .action-button:hover, .submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.back-button {
+ background-color: rgba(108, 122, 137, 0.7); /* Серый для "Назад" */
+}
+.back-button:hover {
+background-color: rgba(108, 122, 137, 0.9);
+}
+
+.action-button {
+  background-color: rgba(0, 123, 255, 0.7); /* Синий для действий */
+}
+.action-button:hover {
+  background-color: rgba(0, 123, 255, 0.9);
+}
+
+.submit-button {
+  background-color: rgba(46, 204, 113, 0.7); /* Зеленый для Submit */
+   width: auto; /* Убираем фиксированную ширину */
+  display: inline-block; /* Чтобы кнопка не занимала всю ширину */
+}
+.submit-button:hover {
+   background-color: rgba(46, 204, 113, 0.9);
+}
+
+/* Контейнер для центрирования кнопок */
+.button-container {
+  display: flex;
+  justify-content: center; /* Центрируем кнопки */
+  gap: 15px; /* Отступ между кнопками */
+  margin-top: 20px;
+  flex-wrap: wrap; /* Перенос кнопок если не влезают */
+}
+
+/* Math problem styles */
+.problem-container {
+margin: 20px 0;
+}
+
+.math-problem {
+  font-size: 2.2em; /* Крупнее */
+  margin: 20px 0;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.input-group {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 15px 0;
+gap: 10px; /* Отступ между инпутом и кнопкой */
+}
+
+.answer-input {
+  padding: 12px; /* Увеличим padding */
+  font-size: 1.8em; /* Крупнее */
+  width: 140px; /* Шире */
+  border: none;
+  border-radius: 8px; /* Более скругленные углы */
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333; /* Цвет текста в инпуте */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+/* Убираем стрелки у input[type=number] */
+.answer-input::-webkit-outer-spin-button,
+.answer-input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.answer-input[type=number] {
+-moz-appearance: textfield; /* Firefox */
+}
+
+
+/* --- ТЕМЫ --- */
+.colorful-theme body {
+  background-image: url('wal1.png');
+}
+.light-theme body {
+  background-image: url('daywal.png');
+}
+.dark-theme body {
+  background-image: url('night.png');
+}
+
+/* Стили для контейнера и текста в зависимости от темы (пример) */
+.light-theme .container {
+  background-color: rgba(240, 240, 255, 0.7); /* Светлый фон контейнера */
+  backdrop-filter: blur(10px);
+}
+.light-theme h1, .light-theme h2, .light-theme h3 {
+ color: #334; /* Темные заголовки */
+ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.light-theme p, .light-theme div, .light-theme span {
+  color: #445; /* Темный текст */
+}
+.light-theme .game-card {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.light-theme .game-card p {
+  color: #556;
+}
+.light-theme .theme-switcher button {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+.light-theme .theme-switcher button:hover {
+ background-color: rgba(0, 0, 0, 0.2);
+}
+.light-theme .back-button, .light-theme .action-button, .light-theme .submit-button {
+ color: #fff; /* Белый текст на кнопках */
+}
+.light-theme .back-button { background-color: rgba(108, 122, 137, 0.8); }
+.light-theme .action-button { background-color: rgba(0, 123, 255, 0.8); }
+.light-theme .submit-button { background-color: rgba(46, 204, 113, 0.8); }
+
+.dark-theme .container {
+  background-color: rgba(10, 10, 20, 0.7); /* Темный фон контейнера */
+  backdrop-filter: blur(10px);
+}
+.dark-theme h1, .dark-theme h2, .dark-theme h3 {
+ color: #dde; /* Светлые заголовки */
+ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+.dark-theme p, .dark-theme div, .dark-theme span {
+  color: #ccc; /* Светлый текст */
+}
+.dark-theme .game-card {
+  background-color: rgba(30, 30, 50, 0.7);
+}
+.dark-theme .game-card p {
+  color: #bbb;
+}
+.dark-theme .theme-switcher button {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #eee;
+}
+.dark-theme .theme-switcher button:hover {
+ background-color: rgba(255, 255, 255, 0.2);
+}
+.dark-theme .back-button { background-color: rgba(108, 122, 137, 0.6); }
+.dark-theme .action-button { background-color: rgba(0, 123, 255, 0.6); }
+.dark-theme .submit-button { background-color: rgba(46, 204, 113, 0.6); }
+
+
+/* Timer styles */
+.timer {
+  font-size: 2.5em; /* Крупнее */
+  color: #fff;
+  margin: 15px 0;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Word display for memory game */
+.word-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px auto; /* Центрирование */
+  gap: 10px; /* Увеличен отступ */
+  max-width: 95%; /* Ограничиваем максимальную ширину */
+}
+
+.word-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 12px; /* Увеличен padding */
+  border-radius: 8px; /* Более скругленные углы */
+  margin-bottom: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 1.1em; /* Крупнее */
+  cursor: default; /* Обычный курсор */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.word-box:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.result-display {
+  margin: 25px 0; /* Увеличен отступ */
+  font-size: 1.3em; /* Крупнее */
+  color: #fff;
+  line-height: 1.6; /* Увеличен межстрочный интервал */
+}
+.result-display span {
+font-weight: bold;
+color: #f1c40f; /* Желтый для значений */
+}
+
+
+/* Records section */
+.records {
+  margin-top: 25px; /* Увеличен отступ */
+  padding: 20px; /* Увеличен padding */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  text-align: left; /* Выравнивание текста влево */
+}
+
+.records h3 {
+  margin-top: 0;
+  margin-bottom: 15px; /* Отступ под заголовком */
+  color: #4e9af1;
+  text-align: center; /* Заголовок по центру */
+}
+
+#records-list {
+max-height: 200px; /* Ограничение высоты для скролла */
+overflow-y: auto; /* Добавляем скролл если нужно */
+}
+
+.record-item {
+  margin: 10px 0; /* Увеличен отступ */
+  color: #ddd;
+  font-size: 0.95em;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Разделитель */
+}
+.record-item:last-child {
+border-bottom: none; /* Убираем разделитель у последнего элемента */
+}
+
+
+/* Recall input for memory game */
+.recall-input {
+  width: 95%; /* Немного меньше 100% */
+  height: 120px; /* Выше */
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  margin: 15px auto; /* Центрирование */
+  display: block;
+  color: #333;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  resize: vertical; /* Разрешаем менять высоту */
+}
+
+/* Instructions sections */
+.instructions {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px; /* Увеличен padding */
+  border-radius: 10px;
+  margin: 20px 0;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.instructions h2 {
+text-align: center;
+margin-bottom: 15px;
+}
+
+.instructions p, .instructions ul {
+  margin: 10px 0;
+  color: #ddd;
+}
+
+.instructions ul {
+  padding-left: 25px;
+}
+
+.instructions li {
+  margin: 8px 0; /* Увеличен отступ */
+}
+
+/* Theme switcher */
+.theme-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Увеличен отступ */
+  margin-top: 25px; /* Увеличен отступ */
+}
+
+.theme-switcher button {
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9em;
+}
+
+.theme-switcher button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+.theme-switcher button.selected { /* Стиль для выбранной темы */
+background-color: #4e9af1;
+box-shadow: 0 0 8px rgba(78, 154, 241, 0.5);
+}
+
+
+/* Stats page specific styles */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stats-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Общие стили для секций на странице статов */
+.stats-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 0; /* Уменьшен вертикальный отступ */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stats-section:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.stats-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px; /* Отступ под заголовком секции */
+  color: #4e9af1;
+  text-align: center;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.xp-bar {
+  height: 12px; /* Немного толще */
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 10px auto; /* Центрирование */
+  width: 80%; /* Не на всю ширину */
+}
+
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4e9af1, #8ec5fc); /* Градиент */
+  width: 0%;
+  transition: width 0.5s;
+  border-radius: 6px;
+}
+
+.lives-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.life-icon {
+  font-size: 1.8em; /* Крупнее */
+   color: #e74c3c; /* Красный цвет */
+   text-shadow: 0 0 5px rgba(231, 76, 60, 0.7); /* Легкое свечение */
+}
+
+.buffs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buff-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.buff-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.buff-icon {
+  margin-right: 10px;
+  font-size: 1.3em; /* Крупнее */
+}
+.buff-text {
+color: #eee;
+}
+
+
+.no-buffs {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  text-align: center;
+  padding: 10px;
+}
+
+.attributes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attribute {
+  display: grid; /* Используем grid для лучшего контроля */
+  grid-template-columns: 1fr 2fr 50px; /* Колонки: Название, Бар, Значение */
+  align-items: center;
+  gap: 10px;
+}
+
+.attribute-name {
+  color: #ddd;
+  font-size: 0.95em;
+  text-align: left; /* Выравнивание влево */
+}
+
+.attribute-bar {
+  height: 10px; /* Немного толще */
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.attribute-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 0.8s ease;
+  border-radius: 5px;
+}
+
+/* Цвета для полосок атрибутов */
+.intelligence-fill { background: linear-gradient(90deg, #3498db, #85c1e9); }
+.sports-fill { background: linear-gradient(90deg, #e74c3c, #f1948a); }
+.languages-fill { background: linear-gradient(90deg, #9b59b6, #d7bde2); }
+.energy-fill { background: linear-gradient(90deg, #f1c40f, #f8c471); }
+.creativity-fill { background: linear-gradient(90deg, #2ecc71, #7fe5ae); }
+.health-fill { background: linear-gradient(90deg, #e67e22, #f0b27a); }
+
+
+.attribute-value {
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.equipment-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.equipment-slot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px; /* Более скругленные */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Легкая граница */
+}
+
+.equipment-slot:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(78, 154, 241, 0.5); /* Подсветка границы */
+}
+
+.slot-name {
+  color: #ddd;
+}
+
+.slot-icon {
+  width: 35px; /* Крупнее */
+  height: 35px; /* Крупнее */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.1em;
+  transition: background-color 0.3s;
+}
+
+.slot-icon.empty {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.slot-icon.equipped {
+  background-color: #4e9af1;
+  box-shadow: 0 0 8px rgba(78, 154, 241, 0.5);
+}
+
+.achievements-section {
+  margin-bottom: 20px;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  padding: 12px; /* Увеличен padding */
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.achievement.locked {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  opacity: 0.7;
+}
+
+.achievement.unlocked {
+  background-color: rgba(78, 154, 241, 0.2);
+  border: 1px solid rgba(78, 154, 241, 0.5);
+  color: #fff;
+  animation: achievement-glow 2s infinite alternate;
+}
+
+@keyframes achievement-glow {
+  from {
+    box-shadow: 0 0 5px rgba(78, 154, 241, 0.4);
+  }
+  to {
+    box-shadow: 0 0 15px rgba(78, 154, 241, 0.7);
+  }
+}
+
+.achievement-icon {
+  margin-right: 15px;
+  font-size: 1.8em;
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #eee; /* Светлее */
+}
+.achievement.locked .achievement-name {
+color: #aaa;
+}
+
+
+.achievement-desc {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+.achievement.locked .achievement-desc {
+color: #999;
+}
+
+/* Character & Pet visualization */
+.character-preview {
+  display: flex; /* Используем flex для расположения перса и пета */
+  justify-content: center;
+  align-items: flex-end; /* Выравниваем по низу */
+  margin: 20px 0 30px; /* Увеличен нижний отступ */
+  min-height: 210px; /* Минимальная высота для контейнера */
+  position: relative; /* Для позиционирования пета */
+}
+
+.character-container {
+  position: relative; /* Остается relative */
+  width: 150px;
+  height: 200px;
+  /* margin: 0 auto; Убираем центрирование margin */
+  transition: all 0.3s ease;
+  z-index: 2; /* Персонаж над петом */
+}
+
+.pet-preview {
+  position: absolute; /* Позиционируем абсолютно */
+  bottom: 5px; /* Отступ от низа */
+  right: 15%; /* Смещаем правее */
+  width: 80px;
+  height: 80px;
+  transition: all 0.3s ease;
+  z-index: 1; /* Пет под персонажем */
+   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.level-info {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.level-info h2 {
+  margin: 5px 0;
+  color: #4e9af1;
+  font-size: 1.5em;
+}
+
+.xp-info {
+  margin: 5px 0;
+  color: #ddd;
+  font-size: 0.9em;
+}
+
+
+/* --- Modal styles --- */
+.modal {
+display: none; /* Скрыто по умолчанию */
+position: fixed; /* Фиксированное позиционирование */
+z-index: 100; /* Поверх всего */
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto; /* Добавить скролл, если нужно */
+background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+backdrop-filter: blur(5px); /* Блюр фона */
+}
+
+.modal-content {
+background-color: rgba(35, 35, 55, 0.9); /* Темный фон контента */
+margin: 10% auto; /* 10% от верха и центрирование */
+padding: 25px;
+border-radius: 10px;
+width: 85%;
+max-width: 500px; /* Максимальная ширина */
+position: relative;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Кнопка закрытия (X) */
+.close {
+color: #aaa;
+position: absolute;
+top: 10px;
+right: 15px;
+font-size: 28px;
+font-weight: bold;
+transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+color: #fff; /* Белый при наведении */
+text-decoration: none;
+cursor: pointer;
+}
+
+/* Customization modal */
+.customization-content {
+  max-height: 70vh; /* Ограничение высоты */
+  overflow-y: auto; /* Скролл если контент не влезает */
+   padding-bottom: 60px; /* Отступ снизу для кнопки сохранения */
+}
+
+.customization-content h2 {
+text-align: center;
+margin-bottom: 20px;
+color: #4e9af1;
+}
+
+
+.customization-section {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.customization-section:last-of-type {
+border-bottom: none; /* Убираем границу у последней секции */
+}
+
+
+.customization-section h3 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #f1c40f; /* Желтый для заголовков кастомизации */
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* Выравнивание влево */
+}
+
+.option-button {
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px; /* Круглые кнопки */
+  cursor: pointer;
+  color: #ddd;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+}
+
+.option-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  border-color: #fff;
+}
+
+.option-button.selected {
+  background-color: #4e9af1;
+  color: white;
+  border-color: #2a75d4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Кнопка сохранения в модальном окне */
+.modal-content .action-button {
+position: absolute; /* Фиксируем внизу */
+bottom: 15px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+/* Animation for character */
+@keyframes idle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); } /* Меньше подпрыгивание */
+}
+
+.character-container:hover {
+  /* animation: idle-bounce 1.5s infinite ease-in-out; Убрал пока */
+}
+
+/* Pet animations */
+@keyframes pet-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-4deg) scale(1.03); }
+  75% { transform: rotate(4deg) scale(1.03); }
+}
+
+.pet-preview:hover .pet-container { /* Анимация при наведении на контейнер пета */
+  animation: pet-wiggle 0.7s infinite ease-in-out;
+}
+
+
+/* --- Battle styles (добавляем стили из battle.css и character.css сюда же для простоты) --- */
+
+/* Battle Arena Styles */
+.battle-container {
+  display: flex;
+  justify-content: space-around; /* Равномерное распределение */
+  align-items: center;
+  padding: 20px 10px; /* Уменьшен горизонтальный padding */
+  background-color: rgba(0, 0, 0, 0.4); /* Немного прозрачнее */
+  border-radius: 15px;
+  margin: 20px 0;
+  min-height: 280px; /* Минимальная высота для арены */
+}
+
+.player-area, .enemy-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Уменьшен отступ */
+  padding: 0 10px; /* Внутренний отступ */
+}
+
+.vs-indicator {
+  font-size: 2.5em; /* Крупнее */
+  font-weight: bold;
+  color: #f39c12;
+  text-shadow: 0 0 10px rgba(243, 156, 18, 0.8); /* Ярче тень */
+  padding: 0 10px;
+}
+
+/* Character displays */
+/* Используем .character-container и .enemy-container уже определенные выше */
+
+.enemy-container {
+  cursor: pointer; /* Make enemy clickable */
+  user-select: none; /* Prevent selection when clicking rapidly */
+  transition: transform 0.1s; /* Анимация клика */
+}
+.enemy-container:active {
+transform: scale(0.95); /* Уменьшение при клике */
+}
+
+
+/* Enemy Info */
+.enemy-area div:not(.enemy-container):not(.health-bar) {
+font-size: 0.9em;
+color: #ccc;
+line-height: 1.4;
+}
+#enemy-name {
+font-weight: bold;
+font-size: 1.1em;
+color: #eee;
+}
+
+
+/* Health bars */
+.health-bar {
+  width: 90%; /* Не на всю ширину */
+  max-width: 150px; /* Макс ширина */
+  height: 14px; /* Толще */
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 7px;
+  overflow: hidden;
+  margin-top: 5px; /* Уменьшен отступ */
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Тонкая рамка */
+}
+
+.health-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #58d68d); /* Зеленый градиент */
+  width: 100%;
+  transition: width 0.3s, background-color 0.3s;
+  border-radius: 7px;
+}
+/* Цвета для полоски здоровья */
+.health-fill.low {
+background: linear-gradient(90deg, #f39c12, #f8c471); /* Желтый */
+}
+.health-fill.critical {
+background: linear-gradient(90deg, #e74c3c, #f1948a); /* Красный */
+}
+
+
+/* --- Animation classes (From battle.css) --- */
+.attack-animation {
+  animation: attack-bounce 0.4s; /* Быстрее */
+}
+
+.damaged-animation {
+  animation: damage-flash 0.4s; /* Быстрее */
+}
+
+.damage-number, .heal-number {
+  position: absolute;
+  font-weight: bold;
+  font-size: 20px; /* Крупнее */
+  animation: float-up 1s forwards ease-out;
+  pointer-events: none;
+  z-index: 100;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.damage-number {
+  color: #e74c3c; /* Красный */
+}
+.heal-number {
+  color: #2ecc71; /* Ярко-зеленый */
+}
+
+
+@keyframes attack-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+
+@keyframes damage-flash {
+0%, 100% { filter: brightness(1) saturate(1); }
+50% { filter: brightness(1.6) saturate(1.5); } /* Ярче и насыщеннее */
+}
+
+@keyframes float-up {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.8); } /* Выше и меньше */
+}
+
+
+/* --- Enemy types (From battle.css) --- */
+/* Убираем clip-path и background-color, т.к. переходим на изображения? */
+/* Если нет, нужно вернуть. Пока оставим для примера */
+/* Если используем character.css для врагов, то эти стили не нужны */
+.enemy-slime { /* Пример, если не картинка */
+  background-color: #3498db;
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  width: 80px; height: 60px; margin-top: 90px;
+}
+.enemy-goblin { /* Пример */
+ background-color: #27ae60;
+ clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
+ width: 90px; height: 120px; margin-top: 30px;
+}
+/* ... и т.д. для других врагов */
+
+/* Новый враг - киберволк (используем картинку) */
+.enemy-cyberwolf {
+background-image: url('cyberwolf.png');
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center bottom;
+width: 120px; /* Подбираем размер */
+height: 130px;
+margin-top: 20px;
+background-color: transparent !important; /* Убираем цвет фона, если он был */
+clip-path: none !important; /* Убираем обрезку */
+}
+
+
+/* --- Healing orb (From battle.css) --- */
+.healing-orb {
+  position: absolute; /* Позиционируется относительно .battle-container */
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #58d68d, #27ae60); /* Градиент */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  animation: pulse-heal 1.5s infinite ease-in-out; /* Плавнее */
+  z-index: 10;
+  user-select: none;
+  box-shadow: 0 0 15px rgba(39, 174, 96, 0.8); /* Ярче свечение */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Светлая рамка */
+}
+
+
+@keyframes pulse-heal {
+  0% { transform: scale(1); box-shadow: 0 0 15px rgba(39, 174, 96, 0.8); }
+  50% { transform: scale(1.15); box-shadow: 0 0 25px rgba(39, 174, 96, 1); }
+  100% { transform: scale(1); box-shadow: 0 0 15px rgba(39, 174, 96, 0.8); }
+}
+
+
+/* Battle messages */
+.battle-messages {
+  margin-top: 15px;
+  max-height: 120px; /* Уменьшена высота */
+  overflow-y: auto;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3); /* Темнее фон */
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left; /* Текст сообщений слева */
+  font-size: 0.9em;
+}
+/* Скроллбар */
+.battle-messages::-webkit-scrollbar { width: 5px; }
+.battle-messages::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 3px;}
+.battle-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 3px;}
+.battle-messages::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
+
+
+.battle-message {
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.system-message {
+  background-color: rgba(52, 152, 219, 0.2);
+  color: #ecf0f1;
+  border-left: 3px solid #3498db;
+}
+
+.reward-message {
+  background-color: rgba(241, 196, 15, 0.2);
+  color: #f1c40f;
+  border-left: 3px solid #f1c40f;
+}
+.player-message { /* Если будут сообщения игрока */
+  background-color: rgba(46, 204, 113, 0.2);
+  color: #e8f8f5;
+  border-left: 3px solid #2ecc71;
+}
+.enemy-message { /* Если будут сообщения врага */
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #fdedec;
+  border-left: 3px solid #e74c3c;
+}
+
+/* --- Battle quiz styles (From battle.css) --- */
+.battle-quiz-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 25px; /* Увеличен padding */
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.battle-quiz-question {
+  font-size: 1.3em; /* Крупнее */
+  color: #fff; /* Белый цвет вопроса */
+  margin-bottom: 20px; /* Больше отступ */
+  text-align: center;
+  line-height: 1.5;
+}
+
+.battle-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки */
+  gap: 12px; /* Увеличен отступ */
+}
+
+.battle-quiz-option {
+  background-color: rgba(78, 154, 241, 0.3);
+  padding: 15px; /* Увеличен padding */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #fff;
+  text-align: center;
+  font-size: 1.05em; /* Крупнее */
+  border: 1px solid rgba(78, 154, 241, 0.5);
+}
+
+.battle-quiz-option:hover {
+  background-color: rgba(78, 154, 241, 0.5);
+  transform: translateY(-2px);
+  border-color: #fff;
+}
+
+.battle-quiz-option.correct {
+  background-color: rgba(46, 204, 113, 0.7);
+  border-color: #2ecc71;
+  color: #fff;
+  font-weight: bold;
+   box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
+.battle-quiz-option.incorrect {
+  background-color: rgba(231, 76, 60, 0.7);
+  border-color: #e74c3c;
+  color: #fff;
+   box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+.battle-quiz-option.disabled { /* Для отключения после выбора */
+pointer-events: none;
+opacity: 0.6;
+}
+
+/* Результат квиза */
+.result-display#quiz-result {
+margin: 20px 0 15px; /* Отступы */
+font-size: 1.1em;
+font-weight: bold;
+text-align: center;
+min-height: 1.5em; /* Резервируем место */
+}
+.result-display#quiz-result.correct-result {
+color: #2ecc71;
+}
+.result-display#quiz-result.incorrect-result {
+color: #e74c3c;
+}
+
+
+.battle-start-container {
+  text-align: center;
+  margin: 20px 0 0; /* Убран нижний отступ */
+}
+
+/* Кнопка Start Battle / Battle */
+#start-battle-button {
+ padding: 12px 30px; /* Крупнее */
+ font-size: 1.2em; /* Крупнее */
+ min-width: 150px; /* Минимальная ширина */
+}
+
+
+/* --- Стили Character (Из character.css) - Базовые структуры --- */
+/* Мы уже определили .character-container и .pet-container выше */
+/* Теперь добавим слои */
+.char-layer, .pet-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* Или cover, в зависимости от нужд */
+}
+
+/* Базовые компоненты персонажа (простые фигуры, если нет картинок) */
+/* Эти стили можно будет заменить на background-image, если будут спрайты */
+#player-body, #char-body {
+  background-color: #fadde1; /* Базовый цвет тела/кожи */
+  clip-path: polygon(40% 30%, 60% 30%, 75% 95%, 25% 95%); /* Форма тела */
+  z-index: 1;
+}
+
+#player-head, #char-head {
+  background-color: #fadde1; /* Цвет головы */
+  width: 40%; /* Относительно контейнера */
+  height: 25%;
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  z-index: 3;
+}
+
+#player-face, #char-face { /* Контейнер для лица */
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  width: 40%;
+  height: 25%;
+  z-index: 4; /* Поверх головы */
+}
+
+/* Глаза */
+#player-face::before, #char-face::before,
+#player-face::after, #char-face::after {
+  content: '';
+  position: absolute;
+  width: 15%; /* Размер глаз */
+  height: 15%;
+  background-color: #333;
+  border-radius: 50%;
+  top: 40%; /* Положение глаз */
+}
+#player-face::before, #char-face::before { left: 20%; }
+#player-face::after, #char-face::after { right: 20%; }
+
+/* Рот */
+#player-mouth, #char-mouth {
+  position: absolute;
+  width: 25%;
+  height: 10%;
+  border-bottom: 2px solid #333;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%; /* Форма улыбки */
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* --- Вариации кастомизации (из character.css) --- */
+
+/* Скины */
+.skin-light #player-head, .skin-light #char-head, .skin-light #player-body, .skin-light #char-body { background-color: #ffcc99; }
+.skin-medium #player-head, .skin-medium #char-head, .skin-medium #player-body, .skin-medium #char-body { background-color: #e6b27f; }
+.skin-dark #player-head, .skin-dark #char-head, .skin-dark #player-body, .skin-dark #char-body { background-color: #a07650; } /* Поправил цвет */
+.skin-fantasy #player-head, .skin-fantasy #char-head, .skin-fantasy #player-body, .skin-fantasy #char-body { background-color: #a3e4d7; }
+
+/* Одежда */
+.outfit-casual #player-outfit, .outfit-casual #char-outfit {
+  background-color: #5cb85c;
+  clip-path: polygon(38% 32%, 62% 32%, 78% 96%, 22% 96%); /* Форма одежды */
+  z-index: 2; /* Поверх тела */
+}
+.outfit-formal #player-outfit, .outfit-formal #char-outfit { background-color: #333; clip-path: polygon(38% 32%, 62% 32%, 78% 96%, 22% 96%); z-index: 2;}
+.outfit-warrior #player-outfit, .outfit-warrior #char-outfit { background-color: #a0522d; clip-path: polygon(35% 32%, 65% 32%, 80% 96%, 20% 96%); z-index: 2;} /* Коричневый */
+.outfit-mage #player-outfit, .outfit-mage #char-outfit { background-color: #6a5acd; clip-path: polygon(30% 32%, 70% 32%, 85% 96%, 15% 96%); z-index: 2;} /* Фиолетовый */
+
+/* Головные уборы */
+.headgear-none #player-headgear, .headgear-none #char-headgear { display: none; }
+.headgear-hat #player-headgear, .headgear-hat #char-headgear {
+  background-color: #d2691e; /* Шоколадный */
+  clip-path: polygon(25% 18%, 75% 18%, 85% 30%, 15% 30%);
+  top: 5%; left: 10%; width: 80%; height: 25%;
+  z-index: 5; /* Поверх лица */
+}
+.headgear-crown #player-headgear, .headgear-crown #char-headgear {
+  background-color: #ffd700; /* Золотой */
+  clip-path: polygon(30% 25%, 40% 10%, 50% 25%, 60% 10%, 70% 25%, 70% 35%, 30% 35%);
+  top: 4%; left: 15%; width: 70%; height: 30%;
+  z-index: 5;
+}
+.headgear-helmet #player-headgear, .headgear-helmet #char-headgear {
+  background-color: #silver;
+  clip-path: polygon(20% 15%, 80% 15%, 85% 40%, 15% 40%);
+   top: 8%; left: 10%; width: 80%; height: 30%;
+  z-index: 5;
+}
+
+/* Оружие */
+.weapon-none #player-weapon, .weapon-none #char-weapon { display: none; }
+/* Простое представление оружия, можно заменить на background-image */
+.weapon-sword #player-weapon, .weapon-sword #char-weapon {
+  background: linear-gradient(180deg, #aaa, #eee, #aaa); /* Металлический градиент */
+  clip-path: polygon(45% 0, 55% 0, 55% 80%, 65% 80%, 50% 100%, 35% 80%, 45% 80%);
+  position: absolute;
+  width: 15%; height: 60%;
+  top: 35%; left: 70%; /* Расположение справа */
+  z-index: 6; /* Поверх всего */
+  transform: rotate(15deg); /* Наклон */
+}
+.weapon-staff #player-weapon, .weapon-staff #char-weapon {
+   background: linear-gradient(180deg, #8b4513, #deb887); /* Деревянный градиент */
+   position: absolute;
+   width: 8%; height: 70%;
+   top: 25%; left: 15%; /* Расположение слева */
+   border-radius: 5px 5px 0 0;
+   z-index: 6;
+   transform: rotate(-10deg);
+}
+/* Сфера на посохе */
+.weapon-staff #player-weapon::after, .weapon-staff #char-weapon::after {
+  content: '';
+  position: absolute;
+  width: 150%; height: 15%; /* Размер сферы */
+  background: radial-gradient(circle, #87cefa, #4682b4); /* Голубая сфера */
+  border-radius: 50%;
+  top: -8%; left: -25%;
+  box-shadow: 0 0 10px #87cefa;
+}
+
+.weapon-bow #player-weapon, .weapon-bow #char-weapon {
+   border: 4px solid #8b4513;
+   border-radius: 0 50% 50% 0 / 0 50% 50% 0; /* Форма лука */
+   width: 30%; height: 70%;
+   position: absolute;
+   top: 30%; left: 65%; /* Расположение */
+   z-index: 6;
+   border-left: none; /* Убираем левую границу для формы */
+   transform: rotate(5deg);
+}
+/* Тетива */
+.weapon-bow #player-weapon::before, .weapon-bow #char-weapon::before {
+content: '';
+position: absolute;
+top: 0; left: 0;
+width: 2px; height: 100%;
+background-color: #ccc;
+}
+
+/* --- Pet styles (From character.css) --- */
+/* Стили для элементов пета (тело, голова, морда...) */
+/* Можно определить базовые формы, а потом перекрашивать/менять тип */
+#pet-body {
+  background-color: #ccc; /* Базовый цвет */
+  clip-path: ellipse(40% 45% at 50% 55%);
+  z-index: 1;
+}
+#pet-head {
+  background-color: #ccc;
+  clip-path: circle(30% at 50% 30%);
+  z-index: 3;
+}
+#pet-face { /* Контейнер */
+position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+z-index: 4;
+}
+/* Глаза пета */
+#pet-face::before, #pet-face::after {
+  content: '';
+  position: absolute;
+  width: 8%; height: 8%;
+  background-color: #222;
+  border-radius: 50%;
+  top: 26%;
+}
+#pet-face::before { left: 38%; }
+#pet-face::after { right: 38%; }
+/* Рот пета */
+#pet-mouth {
+  position: absolute;
+  width: 15%; height: 8%;
+  border-bottom: 1px solid #333;
+  border-radius: 50%;
+  top: 36%; left: 50%;
+  transform: translateX(-50%);
+}
+#pet-accessory { z-index: 5; } /* Аксессуар поверх */
+
+
+/* Типы петов */
+.pet-type-cat #pet-body { background-color: #f39c12; clip-path: ellipse(40% 45% at 50% 55%); }
+.pet-type-cat #pet-head { background-color: #f39c12; clip-path: circle(30% at 50% 30%); }
+/* Усы кота */
+.pet-type-cat #pet-face::before { box-shadow: -10px 5px 0 -4px #333, -15px 8px 0 -4px #333, 10px 5px 0 -4px #333, 15px 8px 0 -4px #333; }
+
+.pet-type-dog #pet-body { background-color: #a07650; clip-path: ellipse(45% 40% at 50% 55%); } /* Более вытянутое тело */
+.pet-type-dog #pet-head { background-color: #a07650; clip-path: ellipse(35% 30% at 50% 30%); } /* Овальная голова */
+/* Язык собаки */
+.pet-type-dog #pet-mouth { border: none; background-color: #e74c3c; border-radius: 0 0 5px 5px; top: 38%; height: 10%; }
+
+.pet-type-dragon #pet-body { background-color: #27ae60; clip-path: polygon(50% 30%, 85% 55%, 75% 90%, 25% 90%, 15% 55%); } /* Форма дракона */
+.pet-type-dragon #pet-head { background-color: #27ae60; clip-path: polygon(50% 0%, 70% 20%, 60% 40%, 40% 40%, 30% 20%); } /* Голова дракона */
+.pet-type-dragon #pet-face::before, .pet-type-dragon #pet-face::after { background-color: #f1c40f; } /* Желтые глаза */
+.pet-type-dragon #pet-mouth { display: none; }
+
+.pet-type-bird #pet-body { background-color: #3498db; clip-path: ellipse(35% 50% at 50% 50%); } /* Овальное тело */
+.pet-type-bird #pet-head { background-color: #3498db; clip-path: circle(30% at 50% 25%); } /* Круглая голова */
+/* Клюв */
+.pet-type-bird #pet-mouth {
+border: none; border-radius: 0;
+clip-path: polygon(50% 100%, 0 0, 100% 0);
+background-color: #f39c12; width: 12%; height: 8%; top: 35%;
+}
+
+/* Цвета петов */
+.pet-color-default {} /* Использует цвет типа */
+.pet-color-black #pet-body, .pet-color-black #pet-head { background-color: #2c3e50; }
+.pet-color-white #pet-body, .pet-color-white #pet-head { background-color: #ecf0f1; }
+.pet-color-white #pet-face::before, .pet-color-white #pet-face::after, .pet-color-white #pet-mouth { border-color: #555; background-color: #555; } /* Темные черты лица */
+.pet-color-gold #pet-body, .pet-color-gold #pet-head { background-color: #f1c40f; }
+.pet-color-blue #pet-body, .pet-color-blue #pet-head { background-color: #3498db; }
+
+/* Аксессуары петов */
+.pet-accessory-none #pet-accessory { display: none; }
+.pet-accessory-bow #pet-accessory {
+  background-color: #e74c3c; /* Красный бант */
+  clip-path: polygon(50% 50%, 0 0, 30% 50%, 0 100%, 50% 50%, 100% 0, 70% 50%, 100% 100%);
+  width: 20%; height: 15%;
+  top: 10%; left: 55%; /* Положение на голове */
+  transform: rotate(15deg);
+}
+.pet-accessory-hat #pet-accessory {
+   background-color: #9b59b6; /* Фиолетовая шляпа */
+   clip-path: polygon(20% 25%, 80% 25%, 100% 100%, 0% 100%);
+   width: 40%; height: 20%;
+   top: 5%; left: 30%;
+}
+/* Поля шляпы */
+.pet-accessory-hat #pet-accessory::before {
+content:''; position: absolute;
+width: 120%; height: 30%;
+background-color: #9b59b6;
+bottom: 0; left: -10%;
+border-radius: 3px;
+}
+
+.pet-accessory-glasses #pet-accessory { /* Очки */
+width: 60%; height: 15%;
+position: absolute; top: 24%; left: 20%;
+border: 2px solid #333;
+border-radius: 8px;
+background-color: rgba(0,0,0,0.1);
+}
+/* Линзы */
+.pet-accessory-glasses #pet-accessory::before, .pet-accessory-glasses #pet-accessory::after {
+content: ''; position: absolute;
+width: 40%; height: 90%;
+border-radius: 50%;
+border: 2px solid #333;
+top: 5%;
+background-color: rgba(100,150,200,0.3); /* Полупрозрачные линзы */
+}
+.pet-accessory-glasses #pet-accessory::before { left: 5%; }
+.pet-accessory-glasses #pet-accessory::after { right: 5%; }
+/* Переносица */
+.pet-accessory-glasses #pet-accessory::after {
+ box-shadow: -8px 0 0 -2px #333; /* Соединяем линзы */
+}
+
+
+/* --- Room styles (Из room.css) --- */
+.room-container {
+  display: flex;
+  margin: 20px 0;
+  gap: 20px;
+  flex-wrap: wrap; /* Разрешаем перенос на маленьких экранах */
+}
+
+.room-canvas {
+  flex: 2; /* Занимает больше места */
+  min-width: 250px; /* Минимальная ширина */
+  height: 350px; /* Выше */
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.room-controls {
+  flex: 1; /* Занимает меньше места */
+  min-width: 150px; /* Минимальная ширина */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Room elements */
+.room-wall {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 70%;
+  background-color: #8e44ad; /* Фиолетовый по умолчанию */
+  transition: background-color 0.5s;
+}
+.room-floor {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 30%;
+  background-color: #3c3c3c; /* Темно-серый по умолчанию */
+  transition: background-color 0.5s;
+}
+
+/* Room items */
+.room-item {
+  position: absolute;
+  transition: all 0.3s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  z-index: 2; /* Предметы над полом/стеной */
+  /* Убрал background-color, используем картинки или более сложные стили */
+}
+
+/* Позиции и размеры предметов (примерные) */
+.room-bed    { width: 100px; height: 70px; bottom: 30%; left: 15px; background-color: #c0392b; border-radius: 5px;} /* Красная кровать */
+.room-desk   { width: 80px; height: 45px; bottom: 30%; right: 20px; background-color: #8b4513; border-radius: 3px;} /* Коричневый стол */
+.room-bookshelf { width: 40px; height: 100px; bottom: 30%; left: 120px; background-color: #d35400; } /* Оранжевый шкаф */
+.room-plant  { width: 35px; height: 55px; bottom: 30%; left: 170px; background-color: #27ae60; border-radius: 50% 50% 5px 5px / 30% 30% 5px 5px;} /* Растение */
+.room-poster { width: 50px; height: 70px; top: 15%; left: 50%; transform: translateX(-50%); background-color: #f1c40f; border: 3px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.3);} /* Постер */
+.room-lamp   { width: 20px; height: 80px; bottom: 30%; right: 110px; background-color: #7f8c8d; } /* Ножка лампы */
+.room-lamp::before { /* Абажур */
+  content: ''; position: absolute;
+  width: 40px; height: 30px; bottom: 100%; left: -10px;
+  background-color: #f1c40f;
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+.room-rug    { width: 120px; height: 60px; bottom: 5%; left: 50%; transform: translateX(-50%); background-color: #16a085; border-radius: 10px; z-index: 1;} /* Коврик */
+.room-computer { width: 50px; height: 35px; bottom: calc(30% + 45px); right: 25px; background-color: #3498db; border-radius: 3px 3px 0 0 ; z-index: 3;} /* Комп на столе */
+.room-computer::before { /* Клавиатура */
+content: ''; position: absolute;
+width: 80%; height: 10px; bottom: -15px; left: 10%;
+background-color: #555; border-radius: 2px;
+}
+
+
+/* Room Controls Sections */
+.room-buffs, .room-items-selector, .room-themes {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Items selector */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Адаптивная сетка */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.room-item-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Центрирование контента */
+  padding: 10px 5px; /* Уменьшен padding */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-height: 60px; /* Минимальная высота */
+  text-align: center;
+   border: 1px solid transparent;
+}
+
+.room-item-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+   border-color: #aaa;
+}
+
+.room-item-option.selected {
+  background-color: rgba(78, 154, 241, 0.4);
+  box-shadow: 0 0 10px rgba(78, 154, 241, 0.5);
+   border-color: #4e9af1;
+}
+
+.item-icon {
+  font-size: 1.8em; /* Крупнее иконки предметов */
+  margin-bottom: 5px;
+}
+.room-item-option div:not(.item-icon) { /* Текст под иконкой */
+font-size: 0.8em;
+color: #ddd;
+}
+
+
+/* Room Themes */
+.theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center; /* Центрируем кнопки тем */
+}
+
+.theme-option {
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9em;
+}
+
+.theme-option:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+   transform: translateY(-1px);
+}
+
+.theme-option.selected {
+  background-color: #4e9af1;
+   box-shadow: 0 0 8px rgba(78, 154, 241, 0.5);
+}
+
+/* Стили для тем комнаты */
+.theme-default .room-wall { background-color: #8e44ad; }
+.theme-default .room-floor { background-color: #3c3c3c; }
+
+.theme-modern .room-wall { background-color: #ecf0f1; }
+.theme-modern .room-floor { background-color: #95a5a6; }
+
+.theme-cozy .room-wall { background: linear-gradient(180deg, #e67e22, #d35400); } /* Градиент для уюта */
+.theme-cozy .room-floor { background-color: #8b4513; } /* Деревянный пол */
+
+.theme-nature .room-wall { background: linear-gradient(180deg, #58d68d, #27ae60); } /* Зеленый градиент */
+.theme-nature .room-floor { background-color: #7f8c8d; } /* Каменный пол */
+
+.theme-tech .room-wall { background: linear-gradient(180deg, #34495e, #2c3e50); } /* Темно-синий */
+.theme-tech .room-floor { background-color: #5d6d7e; } /* Металлический */
+/* Добавим эффект для тех. темы */
+.theme-tech .room-wall::after {
+content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%;
+background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px);
+opacity: 0.5;
+}
+
